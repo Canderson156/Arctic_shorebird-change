@@ -5,7 +5,9 @@ library(miceadds)
 library(arm)
 library(lme4)
 library(ggplot2)
+library(sf)
 library(tidyverse)
+
 
 
 
@@ -23,7 +25,6 @@ library(tidyverse)
 #library(SDMTools)
 #library(velox)
 #library(gdalUtils)
-#library(sf)
 #library(plyr)
 #library(corrplot)
 #library(scales)
