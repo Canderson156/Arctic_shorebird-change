@@ -1,6 +1,7 @@
 data/
 exported/
 figures/
+Robjects/
 .RData
 .Rhistory
 .Rproj.user/

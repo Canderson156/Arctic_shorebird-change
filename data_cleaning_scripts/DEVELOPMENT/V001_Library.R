@@ -1,5 +1,35 @@
+#Set operating system filepath for data file
+
+
+OS <- .Platform$OS.type
+
+if (OS == "unix"){
+  data_path <- "/Volumes/LaCie/PhD/Data/" # MAC file path
+  lib_path <- "/Library/Frameworks/R.framework/Versions/4.0/Resources/library"
+} else if (OS == "windows"){
+  data_path <- "I:/PhD/Data/" # windows file path
+  lib_path <- "C:/Users/andersonch/Documents/R/win-library/4.0"
+} else {
+  print("ERROR: OS could not be identified")
+}
+
+
 ##### LOAD PACKAGES
 
+#check for updates
+options(pkgType = "binary")
+update.packages(lib.loc = lib_path, checkBuilt = TRUE, ask = FALSE)
+
+library(lmtest)
+library(nlme)
+library(ggfortify)
+library(TTR)
+library(changepoint)
+library(kableExtra)
+library(lmerTest)
+library(tictoc)
+library(terra)
+library(raster)
 library(Rmisc)
 library(miceadds)
 library(arm)
@@ -7,11 +37,15 @@ library(lme4)
 library(ggplot2)
 library(sf)
 library(tidyverse)
+library(rgdal)
 
 
 
 
-#library(raster)
+
+
+#library(mapedit)
+#library(adehabitatHR)
 #library(lubridate)
 #library(reshape2)
 #library(beepr)
@@ -20,7 +54,6 @@ library(tidyverse)
 #library(MASS)
 #library(rgeos)
 #library(maptools)
-#library(rgdal)
 #library(reshape)
 #library(SDMTools)
 #library(velox)
@@ -64,7 +97,7 @@ options(stringsAsFactors = FALSE) #disable strings as factors
 
 
 #### source custom functions
-source.all("functions/")
+source.all(paste(data_path, "R_functions/", sep = ""))
 
 
 
@@ -73,12 +106,14 @@ source.all("functions/")
 
 ## Coordinate reference systems
 
+### need to update these to be in WKT / PROJ6 format
+
 
 #NPLAEA <-  CRS("+init=EPSG:3573")
 #AEA <- CRS("+proj=aea +lat_1=50 +lat_2=70 +lat_0=40 +lon_0=-96 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs +ellps=GRS80 +towgs84=0,0,0")
-#LCC <- CRS("+proj=lcc +lat_1=49 +lat_2=77 +lat_0=0 +lon_0=-95 +x_0=0 +y_0=0 +ellps=GRS80 +units=m +no_defs")
+LCC <- CRS("+proj=lcc +lat_1=49 +lat_2=77 +lat_0=0 +lon_0=-95 +x_0=0 +y_0=0 +datum=NAD83 +ellps=GRS80 +units=m +no_defs")
 #WGS84 <- CRS("+init=EPSG:4326")
-#NAD83 <- CRS("+init=EPSG:4269")
+NAD83 <- CRS("+init=EPSG:4269")
 
 
 
